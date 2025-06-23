@@ -1,0 +1,100 @@
+
+
+body {
+   background-color: rgb(4, 4, 122);
+}
+
+header {
+    display: flex;
+}
+.title {
+   color: blanchedalmond;
+   text-decoration: none;
+   font-size: 2em;
+   text-align: center;
+   margin-top: 20px;
+}
+
+ul {
+    
+ display: flex;
+  justify-content: center;
+  margin-left: 25%;
+  font-size: 1.5em;
+  flex-wrap: wrap;
+  
+
+}
+
+li {
+   
+    list-style: none;
+   margin: 10px;
+}
+li > a {
+    text-decoration: none;
+    color: blanchedalmond;
+
+    
+}
+@media (max-width: 688px) {
+    ul {
+        display:none;
+    }
+}
+
+@media (max-width: 975px)  {
+    ul {
+       margin-left: 10%;
+    }
+}
+
+@media (max-width: 900px)  {
+    ul {
+       margin-left: 5%;
+    }
+}
+.container_produits {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+.card_produit {
+   text-align: center;
+    width: 200px ;
+    height:  200px;
+    border-style: solid;
+    border-color: blanchedalmond;
+    border-width: 1px;
+    border-radius: 8px;
+}
+
+.card_creations {
+
+text-align: center;
+    width: 200px ;
+    height:  200px;
+    border-style: solid;
+    border-color: blanchedalmond;
+    border-width: 1px;
+    border-radius: 8px;
+
+}
+
+form {
+
+    width: 260px;
+    
+    margin: auto;
+    margin-top: 15vh;
+}
+label {
+    color: #fdc500;
+    font-size: 1.5em;
+}
+input {
+    margin-bottom: 20px;
+}
