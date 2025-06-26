@@ -77,10 +77,9 @@ li > a {
 text-align: center;
     width: 200px ;
     height:  200px;
-    border-style: solid;
-    border-color: blanchedalmond;
-    border-width: 1px;
+  
     border-radius: 8px;
+    background: rgb(185, 185, 183);
 
 }
 

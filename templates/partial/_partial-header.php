@@ -11,11 +11,12 @@
     <header>
         <a class="title" href="index.php">logo</a>
         <ul>
-            <li><a href="?create">creation</a></li>
+            <li><a href="?cr">creation</a></li>
             <li><a href="?services">service</a></li>
             <li><a href="?prod">boutique</a></li>
             <li><a href="?contact">contact</a></li>
             <li><a href="?connexion">connexion</a></li>
             <li><a href="">inscription</a></li>
+            <li><a href="?controller=access&action=admin">admin</a></li>
         </ul>
     </header>
