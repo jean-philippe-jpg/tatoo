@@ -3,11 +3,12 @@ namespace App\Controller;
 
 use App\Controller\PagesController;
 use App\Repository\ServicesRepository;
+use App\Repository\CreationsRepository;
 use App\Repository\PrestationsRepository;
 
 
 
-class ServicesController extends Controller
+class CreationsController extends Controller
 {
     public function route(): void
     {
@@ -36,6 +37,9 @@ class ServicesController extends Controller
                 case 'show':
                     $this->show();
                     break;
+                  case 'list':
+                    $this->list();
+                    break;
                 
 
                  default:
@@ -48,42 +52,44 @@ class ServicesController extends Controller
 
 protected function create(): void
  {
-        $servicesRepository = new ServicesRepository();
+        $servicesRepository = new CreationsRepository();
         $servicesRepository->create();
 
-        $this->render('/Admin/Services/create' );
+        $this->render('/Admin/Creations/create' );
         
     }
 
  protected function read(): void
  {
-        $servicesRepository = new ServicesRepository();
-        $services = $servicesRepository->read();
-        $this->render('/Admin/Services/read', [
-            'services' => $services
+        $creationsRepository = new CreationsRepository();
+        $creations = $creationsRepository->read();
+        $this->render('/Admin/Creations/read', [
+            'creation' => $creations
         ]);
     }
+
+   
     protected function update()
  {
         $id = $_GET['id'];
-        $servicesRepository = new ServicesRepository();
-        $findoneby = $servicesRepository->findOneBy($id);
-        $servicesRepository->update($id);
+        $prestationsRepository = new CreationsRepository();
+         $findoneby = $prestationsRepository->findOneBy($id);
+        $prestationsRepository->update($id);
 
-        $this->render('/Admin/Services/create', [
-            
+        $this->render('/Admin/Creations/create', [
+
             'findone' => $findoneby
         ] );
-         
+        
     }
 
     protected function delete()
  {
         $id = $_GET['id'];
-        $servicesRepository = new ServicesRepository();
+        $servicesRepository = new CreationsRepository();
         $servicesRepository->delete($id);
 
-        $this->render('/Admin/Services/read' );
+        $this->render('/Admin/Creations/read' );
         
     }
 
@@ -91,15 +97,26 @@ protected function create(): void
 
  {      
             $id = $_GET['id'] ?? null;
-        $servicesRepository = new ServicesRepository();
-         $service = $servicesRepository->findOneBy($id);
+        $creationsRepository = new CreationsRepository();
+         $findoneby = $creationsRepository->findOneBy($id);
 
-        $this->render('/Admin/Services/show', [
+        $this->render('/Admin/Creations/show', [
 
-            'service' => $service
+            'findone' => $findoneby
 
         ] );
  }
+
+  protected function list(): void
+ {
+        $prestationsRepository = new PrestationsRepository();
+        $prestations = $prestationsRepository->read();
+       
+        $this->render('/prestation', [
+            'prestation' => $prestations,
+            
+        ]);
+    }
 
  
 }

@@ -1,12 +1,6 @@
 <?php
 namespace App\Controller;
 
-
-use App\Controller\PagesController;
-
-use App\Repository\ServicesRepository;
-
-
 class Controller{
    
     public function route(): void {
@@ -33,6 +27,18 @@ try {
         case 'services':
 
             $pagecontroller = new ServicesController();
+            $pagecontroller->route();
+            break;
+
+        case 'prestations':
+
+            $pagecontroller = new PrestationsController();
+            $pagecontroller->route();
+            break;
+
+         case 'creations':
+
+            $pagecontroller = new CreationsController();
             $pagecontroller->route();
             break;
                            

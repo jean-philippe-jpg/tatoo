@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Repository\ServicesRepository;
+use App\Repository\CreationsRepository;
+use App\Repository\PrestationsRepository;
 
 
 
@@ -26,7 +28,7 @@ class PagesController extends Controller
                     case 'home':
                         $this->home();
                         break;
-
+                    
                 default:
                     throw new \Exception('Action non reconnue');
             }
@@ -59,10 +61,25 @@ class PagesController extends Controller
     {
         $servicesRepository = new ServicesRepository();
         $services = $servicesRepository->read();
+         $creationsRepository = new CreationsRepository();
+        $creations = $creationsRepository->read();
 
         $this->render('/home', [
-            'services' => $services
+            'services' => $services,
+            'creation' => $creations
         ]);
     }
+
+    protected function prestations(): void
+    {
+        $prestationsRepository = new PrestationsRepository();
+        $prestations = $prestationsRepository->read();
+
+        $this->render('/prestation', [
+            'services' => $prestations
+        ]);
+    }
+
+    
 
     }

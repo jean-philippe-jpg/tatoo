@@ -7,7 +7,7 @@ use App\Repository\PrestationsRepository;
 
 
 
-class ServicesController extends Controller
+class PrestationsController extends Controller
 {
     public function route(): void
     {
@@ -36,6 +36,9 @@ class ServicesController extends Controller
                 case 'show':
                     $this->show();
                     break;
+                  case 'list':
+                    $this->list();
+                    break;
                 
 
                  default:
@@ -48,42 +51,44 @@ class ServicesController extends Controller
 
 protected function create(): void
  {
-        $servicesRepository = new ServicesRepository();
+        $servicesRepository = new PrestationsRepository();
         $servicesRepository->create();
 
-        $this->render('/Admin/Services/create' );
+        $this->render('/Admin/Prestations/create' );
         
     }
 
  protected function read(): void
  {
-        $servicesRepository = new ServicesRepository();
-        $services = $servicesRepository->read();
-        $this->render('/Admin/Services/read', [
-            'services' => $services
+        $prestationsRepository = new PrestationsRepository();
+        $prestations = $prestationsRepository->read();
+        $this->render('/Admin/Prestations/read', [
+            'prestation' => $prestations
         ]);
     }
+
+   
     protected function update()
  {
         $id = $_GET['id'];
-        $servicesRepository = new ServicesRepository();
-        $findoneby = $servicesRepository->findOneBy($id);
-        $servicesRepository->update($id);
+        $prestationsRepository = new PrestationsRepository();
+         $findoneby = $prestationsRepository->findOneBy($id);
+        $prestationsRepository->update($id);
 
-        $this->render('/Admin/Services/create', [
-            
+        $this->render('/Admin/Prestations/create', [
+
             'findone' => $findoneby
         ] );
-         
+        
     }
 
     protected function delete()
  {
         $id = $_GET['id'];
-        $servicesRepository = new ServicesRepository();
+        $servicesRepository = new PrestationsRepository();
         $servicesRepository->delete($id);
 
-        $this->render('/Admin/Services/read' );
+        $this->render('/Admin/Prestations/read' );
         
     }
 
@@ -91,15 +96,24 @@ protected function create(): void
 
  {      
             $id = $_GET['id'] ?? null;
-        $servicesRepository = new ServicesRepository();
-         $service = $servicesRepository->findOneBy($id);
+        $prestationsRepository = new PrestationsRepository();
+         $findoneby = $prestationsRepository->findOneBy($id);
 
-        $this->render('/Admin/Services/show', [
+        $this->render('/Admin/Prestations/show', [
 
-            'service' => $service
+            'findone' => $findoneby
 
         ] );
  }
+
+  protected function list(): void
+ {
+        $prestationsRepository = new PrestationsRepository();
+        $prestations = $prestationsRepository->read();
+        $this->render('/prestation', [
+            'prestation' => $prestations
+        ]);
+    }
 
  
 }

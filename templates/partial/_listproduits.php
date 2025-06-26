@@ -3,8 +3,7 @@
 
 
 
-$produits = array('Produit 1', 'Produit 2', 'Produit 3', 'Produit 4', 'Produit 5');
-$produits = str_replace(',', '', $produits);
+
 
 
 if (isset($_GET['prod']) ) {?>

@@ -11,7 +11,7 @@
     <header>
         <a class="title" href="index.php">logo</a>
         <ul>
-            <li><a href="?cr">creation</a></li>
+            <li><a href="?creations">creation</a></li>
             <li><a href="?services">service</a></li>
             <li><a href="?prod">boutique</a></li>
             <li><a href="?contact">contact</a></li>

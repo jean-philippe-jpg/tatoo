@@ -2,12 +2,13 @@
 
 
 
-
-<div class="card_creations">
+        
     
-        <h4><?php echo $services['titre'] ?></h4>
-        <p><?php echo $services['description'] ?></p>
+
+<div class="card_show">
+    
+       <h4><?= $service['titre']; ?></h4>
+       <p><?= $service['description'] ?></p>
 
 </div>      
-
 

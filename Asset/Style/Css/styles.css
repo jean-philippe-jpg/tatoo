@@ -79,8 +79,34 @@ text-align: center;
     height:  200px;
   
     border-radius: 8px;
-    background: rgb(185, 185, 183);
+    background: #caf0f8;
 
+}
+
+.card_services {
+
+text-align: center;
+    width: 300px ;
+    border-radius: 8px;
+    background: #caf0f8;
+    padding: 10px;
+
+}
+.card_show {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    width: 300px;
+    
+   
+    border-radius: 8px;
+    background: #caf0f8;
+
+}
+
+.table {
+
+    margin: auto;
 }
 
 form {

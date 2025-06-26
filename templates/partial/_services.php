@@ -7,10 +7,12 @@
 
 <?php foreach( $services as $service ){ ?>
 
-<div class="card_creations">
+<div class="card_services">
     
         <h4><?php echo $service['titre'] ?></h4>
         <p><?php echo $service['description'] ?></p>
+
+        <a  href="?controller=prestations&action=list">voir</a>
 
 </div>      
 

@@ -3,12 +3,7 @@ namespace App\Repository;
 
 use App\Bdd\MySql;
 
-//require_once './App/Bdd/MySql.php';
-//require_once './App/Repository/ServicesRepository.php';
-//use App\Repository\ServicesRepository;
-//use App\Bdd\MySql;
-
-class ServicesRepository
+class PrestationsRepository
 {
 
 
@@ -24,20 +19,25 @@ public function create(){
                     
                             $titre = null;
                             $description = null;
+                            $tarif = null;
                             
 
                    } else {
                     
                    
                     $titre = $_POST['titre']  ;
-                    $description = $_POST['description']  ;
+                    $description = $_POST['description'] ;
+                    $tarif = $_POST['tarif']  ;
+
                     $sanitized_titre = htmlspecialchars($titre, ENT_QUOTES | ENT_HTML5, 'UTF-8');   
                     $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $sanitized_tarif = htmlspecialchars($tarif, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                        
             
-                     $stmt = $pdo->prepare('INSERT INTO services (titre, description ) VALUES (:titre, :description )');
+                     $stmt = $pdo->prepare('INSERT INTO tarifs (titre, description, tarif ) VALUES (:titre, :description, :tarif )');
                 $stmt->bindParam(':titre',  $sanitized_titre, $pdo::PARAM_STR);
                 $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
+                $stmt->bindParam(':tarif', $sanitized_tarif , $pdo::PARAM_INT);
                 
         
                
@@ -68,7 +68,7 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT * FROM services where id = :id" );
+                $stmt = $pdo->prepare( "SELECT * FROM tarifs where id = :id" );
                 $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
 
                 if($stmt->execute()){
@@ -99,7 +99,7 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT * FROM services" );
+                $stmt = $pdo->prepare( "SELECT * FROM tarifs" );
                
                 if($stmt->execute()){
 
@@ -130,21 +130,26 @@ public function findOneBy( $id){
 
                if(empty($_POST['description'])){
                     
-                            $description = null;  
+                            $description = null; 
+                             $tarif = null;   
 
                    } else {
                     
                    
                    
                     $description = $_POST['description'] ;  
+                    $tarif = $_POST['tarif'] ; 
                     $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $sanitized_tarif = htmlspecialchars($tarif, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                        
             
-                     $stmt = $pdo->prepare('UPDATE services set description = :description where id = :id');
-               $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
-                $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
+                    $stmt = $pdo->prepare('UPDATE tarifs set description = :description, tarif = :tarif where id = :id');
+                    $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
+
+                    $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
+                    $stmt->bindParam(':tarif', $sanitized_tarif , $pdo::PARAM_STR);
                 
-                $stmt->fetch($pdo::FETCH_ASSOC);
+                    $stmt->fetch($pdo::FETCH_ASSOC);
         
                
                 if($stmt->execute()){
@@ -175,7 +180,7 @@ public function delete($id){
               
                    $id = $_GET['id'] ?? null;
             
-                     $stmt = $pdo->prepare('DELETE FROM services where id = :id');
+                     $stmt = $pdo->prepare('DELETE FROM tarifs where id = :id');
                $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                 
                 
@@ -183,7 +188,7 @@ public function delete($id){
         
                
                 if($stmt->execute()){
-
+                    
                     echo 'suppression effectuée ';
                     
                   
