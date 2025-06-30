@@ -50,8 +50,10 @@ protected function create(): void
  {
         $servicesRepository = new ServicesRepository();
         $servicesRepository->create();
+        
+        $this->render('/Admin/Services/create', [
 
-        $this->render('/Admin/Services/create' );
+        ] );
         
     }
 

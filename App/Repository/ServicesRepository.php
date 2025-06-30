@@ -134,17 +134,17 @@ public function findOneBy( $id){
 
                    } else {
                     
-                   
-                   
                     $description = $_POST['description'] ;  
+                      
                     $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                       
+                    
             
-                     $stmt = $pdo->prepare('UPDATE services set description = :description where id = :id');
-               $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
-                $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
-                
-                $stmt->fetch($pdo::FETCH_ASSOC);
+                     $stmt = $pdo->prepare('UPDATE services set description = :description, prestations_id = :prestations_id where id = :id ');
+                     $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
+                     $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
+                    
+                     
+                     $stmt->fetch($pdo::FETCH_ASSOC);
         
                
                 if($stmt->execute()){

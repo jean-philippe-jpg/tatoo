@@ -12,7 +12,7 @@
         <h4><?php echo $service['titre'] ?></h4>
         <p><?php echo $service['description'] ?></p>
 
-        <a  href="?controller=prestations&action=list">voir</a>
+        <a  href="?controller=prestations&action=list&id=<?= $service['id']?>">voir</a>
 
 </div>      
 

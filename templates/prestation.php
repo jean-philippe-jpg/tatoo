@@ -1,13 +1,21 @@
-<?php
 
-foreach ($prestation as $prestations) {
-    ?>
+<?php if (!empty($findone)) { ?>
+
+<p><?= $findone['description'] ?></p>
+
+<?php } else {?>
+
+<?php foreach ($prestation as $prestations) {  ?>
+    
     <div class="container_prestation">
-        <h2><?= $prestations['titre']; ?></h2>
+        <a href="?controller=prestations&action=detail&id=<?= $prestations['presta_id']?>"><?= $prestations['titre']; ?></a>
        
     </div>
-    <?php
+    
+     <?php } }?>
 
 
 
-}
+      
+        
+   
