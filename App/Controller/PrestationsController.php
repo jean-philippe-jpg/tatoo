@@ -40,7 +40,7 @@ class PrestationsController extends Controller
                     break;
 
                  case 'detail':
-                    $this->show();
+                    $this->detail();
                     break;
                 
 
@@ -102,7 +102,7 @@ protected function create(): void
         $prestationsRepository = new PrestationsRepository();
         $prestationsRepository->delete($id);
 
-        $this->render('/Admin/Prestations/read' );
+        //$this->render('/Admin/Prestations/read' );
         
     }
 
@@ -136,6 +136,22 @@ protected function create(): void
             'prestation' => $prestations
         ]);
     }
+
+     protected function detail() : void 
+
+ {      
+            $id = $_GET['id'] ?? null;
+        $prestationsRepository = new PrestationsRepository();
+         $findoneby = $prestationsRepository->findOneBy($id);
+         $model = $prestationsRepository->modelsList($id);
+
+        $this->render('/detail', [
+
+            'findone' => $findoneby,
+            'model' => $model
+
+        ] );
+        }
 
  
 }

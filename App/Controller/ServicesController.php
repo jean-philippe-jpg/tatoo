@@ -85,7 +85,7 @@ protected function create(): void
         $servicesRepository = new ServicesRepository();
         $servicesRepository->delete($id);
 
-        $this->render('/Admin/Services/read' );
+        //$this->render('/Admin/Services/read' );
         
     }
 

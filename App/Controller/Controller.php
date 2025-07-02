@@ -1,6 +1,9 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\PicsPrestaController;
+
+
 class Controller{
    
     public function route(): void {
@@ -39,6 +42,12 @@ try {
          case 'creations':
 
             $pagecontroller = new CreationsController();
+            $pagecontroller->route();
+            break;
+
+             case 'photospresta':
+
+            $pagecontroller = new PicsPrestaController();
             $pagecontroller->route();
             break;
                            

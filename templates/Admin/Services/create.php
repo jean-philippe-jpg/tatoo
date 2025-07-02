@@ -5,6 +5,9 @@
    <fieldset style="border-radius: 8px;">
     <legend style="color:  #fdc500;"><?= $findone['titre'] ?></legend>
 
+    <label for="titre">Titre</label>
+    <input type="text" name="titre" id="titre" value="<?= $findone['titre']?>" >
+
     <label for="description">Description</label>
   <textarea name="description" id="description" ><?= $findone['description']?></textarea>
     

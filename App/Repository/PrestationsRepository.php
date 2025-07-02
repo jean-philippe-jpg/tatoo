@@ -67,8 +67,8 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT  t.id as id, s.id, t.description as description, t.titre as titre, t.tarif as tarif from tarifs t
-                                        INNER JOIN services s  on s.id = t.service_id where t.id = :id" );
+                $stmt = $pdo->prepare( "SELECT  t.id as id, /*s.id,*/ t.description as description, t.titre as titre, t.tarif as tarif from tarifs t
+                                        /*INNER JOIN services s  on s.id = t.service_id*/ where t.id = :id" );
                  $stmt->bindParam(':id',  $id, $pdo::PARAM_STR);
 
                
@@ -104,6 +104,7 @@ public function findOneBy( $id){
                 $pdo = $mysql->getPDO();
 
                $stmt = $pdo->prepare( "SELECT * FROM tarifs" );
+              
             
                 if($stmt->execute()){
 
@@ -134,6 +135,38 @@ public function findOneBy( $id){
 
                 $stmt = $pdo->prepare( "SELECT t.id as presta_id, t.titre, s.id from services s
                                         INNER JOIN tarifs t  on s.id = t.service_id where s.id = :id" );
+                 $stmt->bindParam(':id',  $id, $pdo::PARAM_STR);
+
+
+                if($stmt->execute()){
+
+                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
+                    
+                   return $stmt->fetchAll();
+                  
+                } else {
+                    echo 'erreur ';
+                }
+              
+               
+        } catch(\Exception $e){
+            echo 'erreur de lecture'. $e->getMessage();
+           
+
+        }
+       
+        }
+
+         public function modelsList($id){
+
+        try{
+           
+
+                $mysql = Mysql::getInstance();
+                $pdo = $mysql->getPDO();
+
+                $stmt = $pdo->prepare( "SELECT t.id as presta_id, t.titre, p.name as name, p.prix as prix, p.libele as libele from tarifs t
+                                        INNER JOIN pics_presta p  on p.presta_id = t.id where t.id = :id" );
                  $stmt->bindParam(':id',  $id, $pdo::PARAM_STR);
 
 
@@ -247,5 +280,49 @@ public function delete($id){
         }
        
 }
+
+ public function images(){
+
+        try {
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+        
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (empty($_FILES['images']['tmp_name'])) {
+                    
+                    echo 'Veuillez sélectionner un fichier.';
+                } else {
+                    $file_basename = pathinfo($_FILES['images']['name'], PATHINFO_FILENAME);
+                    $file_ext = pathinfo($_FILES['images']['name'], PATHINFO_EXTENSION);
+        
+                    $new_name = $file_basename . '_' . date("Ymd_His") . '.' . $file_ext;
+                        
+                     $name = $_POST['name']  ;
+                    $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');   
+
+                    $images = $pdo->prepare('INSERT INTO picspresta (name, libele, presta_id) VALUES (:name, :libele, :presta_id)');
+                    $images->bindParam(':name', $new_name, $pdo::PARAM_STR);
+                      $images->bindParam(':libele', $sanitized_name, $pdo::PARAM_STR);
+                    $images->bindParam(':presta_id', $_POST['habitat_id'], $pdo::PARAM_INT);
+        
+                    if ($images->execute()) {
+                        $target_dir = "../uploads/";
+                        $target_path = $target_dir . $new_name;
+        
+                        if (move_uploaded_file($_FILES['images']['tmp_name'], $target_path)) {
+                            echo 'Téléchargement réussi : ' . htmlspecialchars($new_name);
+                        } else {
+                            echo 'Erreur lors du déplacement du fichier.';
+                        }
+                    } else {
+                        echo 'Erreur lors de l\'insertion dans la base de données.';
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+
+    }
 
 } 

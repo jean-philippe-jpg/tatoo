@@ -96,12 +96,27 @@ text-align: center;
     margin: auto;
     padding: 10px;
     text-align: center;
-    width: 300px;
+  
     
    
     border-radius: 8px;
     background: #caf0f8;
 
+}
+
+.container_models{
+    display: flex;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.card_models {
+
+    
+}
+.img-models {
+
+    border-radius: 8px;
 }
 
 .table {
