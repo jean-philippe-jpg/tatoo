@@ -3,12 +3,8 @@ namespace App\Repository;
 
 use App\Bdd\MySql;
 
-//require_once './App/Bdd/MySql.php';
-//require_once './App/Repository/ServicesRepository.php';
-//use App\Repository\ServicesRepository;
-//use App\Bdd\MySql;
 
-class ServicesRepository
+class CategoriesRepository
 {
 
 
@@ -23,8 +19,7 @@ public function create(){
                if(empty($_POST['titre'])){
                     
                             $titre = null;
-                            $description = null;
-                            
+                            $description = null;  
 
                    } else {
                     
@@ -35,7 +30,7 @@ public function create(){
                     $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                        
             
-                     $stmt = $pdo->prepare('INSERT INTO services (titre, description ) VALUES (:titre, :description )');
+                     $stmt = $pdo->prepare('INSERT INTO categorie (titre, description ) VALUES (:titre, :description )');
                 $stmt->bindParam(':titre',  $sanitized_titre, $pdo::PARAM_STR);
                 $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
                 
@@ -68,7 +63,7 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT * FROM services where id = :id" );
+                $stmt = $pdo->prepare( "SELECT * FROM categorie where id = :id" );
                 $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
 
                 if($stmt->execute()){
@@ -99,7 +94,7 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT * FROM services" );
+                $stmt = $pdo->prepare( "SELECT * FROM categorie" );
                
                 if($stmt->execute()){
 
@@ -140,7 +135,7 @@ public function findOneBy( $id){
                     $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     
             
-                     $stmt = $pdo->prepare('UPDATE services set description = :description, titre = :titre where id = :id ');
+                     $stmt = $pdo->prepare('UPDATE categorie set description = :description, titre = :titre where id = :id ');
                      $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                      $stmt->bindParam(':titre', $sanitized_titre , $pdo::PARAM_STR);
                       $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
@@ -177,7 +172,7 @@ public function delete($id){
               
                    $id = $_GET['id'] ?? null;
             
-                     $stmt = $pdo->prepare('DELETE FROM services where id = :id');
+                     $stmt = $pdo->prepare('DELETE FROM categorie where id = :id');
                $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                 
                 

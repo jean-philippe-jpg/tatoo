@@ -1,12 +1,11 @@
 <?php
 namespace App\Controller;
 
+use App\Repository\BoutiqueRepository;
 use App\Repository\ServicesRepository;
 use App\Repository\CreationsRepository;
 use App\Repository\PrestationsRepository;
-
-
-
+use App\Repository\UsersRepository;
 
 class PagesController extends Controller
 {
@@ -63,10 +62,15 @@ class PagesController extends Controller
         $services = $servicesRepository->read();
          $creationsRepository = new CreationsRepository();
         $creations = $creationsRepository->read();
-
+         $creationsRepository = new BoutiqueRepository();
+        $boutique = $creationsRepository->read();
+      
         $this->render('/home', [
             'services' => $services,
-            'creation' => $creations
+            'creation' => $creations,
+             'article' => $boutique,
+        
+            
         ]);
     }
 

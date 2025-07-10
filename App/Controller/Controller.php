@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+
 use App\Controller\PicsPrestaController;
 
 
@@ -45,9 +46,24 @@ try {
             $pagecontroller->route();
             break;
 
-             case 'photospresta':
+        case 'photospresta':
 
             $pagecontroller = new PicsPrestaController();
+            $pagecontroller->route();
+            break;
+
+        case 'boutique':
+            $pagecontroller = new BoutiqueController();
+            $pagecontroller->route();
+            break;
+
+            case 'categories':
+            $pagecontroller = new CategoriesController();
+            $pagecontroller->route();
+            break;
+
+        case 'users':
+            $pagecontroller = new UsersController();
             $pagecontroller->route();
             break;
                            

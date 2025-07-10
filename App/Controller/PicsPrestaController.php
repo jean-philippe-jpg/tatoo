@@ -37,9 +37,7 @@ class PicsPrestaController extends Controller
                 case 'show':
                     $this->show();
                     break;
-                  /*case 'list':
-                    $this->list();
-                    break;*/
+                 
                 
 
                  default:

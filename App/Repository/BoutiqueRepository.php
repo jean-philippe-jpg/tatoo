@@ -8,57 +8,60 @@ use App\Bdd\MySql;
 //use App\Repository\ServicesRepository;
 //use App\Bdd\MySql;
 
-class ServicesRepository
+class BoutiqueRepository
 {
 
 
 public function create(){
 
-        try{
-           
-
-                $mysql = Mysql::getInstance();
-                $pdo = $mysql->getPDO();
-
-               if(empty($_POST['titre'])){
-                    
-                            $titre = null;
-                            $description = null;
-                            
-
-                   } else {
-                    
-                   
-                    $titre = $_POST['titre']  ;
-                    $description = $_POST['description']  ;
-                    $sanitized_titre = htmlspecialchars($titre, ENT_QUOTES | ENT_HTML5, 'UTF-8');   
-                    $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                       
-            
-                     $stmt = $pdo->prepare('INSERT INTO services (titre, description ) VALUES (:titre, :description )');
-                $stmt->bindParam(':titre',  $sanitized_titre, $pdo::PARAM_STR);
-                $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
-                
+        try {
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
         
-               
-                if($stmt->execute()){
-
-                    echo 'enregistrement reussi';
-                    //$stmt->setFetchMode($pdo::FETCH_ASSOC);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (empty($_FILES['images']['tmp_name'])) {
                     
-                   //return $stmt->fetchAll();
-                  
+                    echo 'Veuillez sélectionner un fichier.';
                 } else {
-                    echo 'erreur ';
+                    $file_basename = pathinfo($_FILES['images']['name'], PATHINFO_FILENAME);
+                    $file_ext = pathinfo($_FILES['images']['name'], PATHINFO_EXTENSION);
+        
+                    $new_name = $file_basename . '_' . date("Ymd_His") . '.' . $file_ext;
+                        
+                     $titre = $_POST['titre'] ;
+                     $description = $_POST['description'] ;
+                     $prix = $_POST['prix'] ;
+                     $presta_id = $_POST['categorie_id'];
+                    $sanitized_titre = htmlspecialchars($titre, ENT_QUOTES | ENT_HTML5, 'UTF-8');   
+                    $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');  
+                    $sanitized_prix = htmlspecialchars($prix, ENT_QUOTES | ENT_HTML5, 'UTF-8');      
+                    $sanitized_presta = htmlspecialchars($presta_id, ENT_QUOTES | ENT_HTML5, 'UTF-8'); 
+
+                    $images = $pdo->prepare('INSERT INTO boutique (titre, description, prix, libele,categorie_id) VALUES (:titre, :description, :prix, :libele, :categorie_id)');
+                    $images->bindParam(':titre',$sanitized_titre, $pdo::PARAM_STR);
+                    $images->bindParam(':description', $sanitized_description, $pdo::PARAM_INT);
+                    $images->bindParam(':prix',  $sanitized_prix, $pdo::PARAM_STR);
+                     $images->bindParam(':libele',  $new_name, $pdo::PARAM_STR);
+                    $images->bindParam(':categorie_id', $sanitized_presta, $pdo::PARAM_INT);
+       
+                    if ($images->execute()) {
+                        $target_dir = "./templates/Admin/PicsPresta/Uploads/";
+                        $target_path = $target_dir . $new_name;
+        
+                        if (move_uploaded_file($_FILES['images']['tmp_name'], $target_path)) {
+                            echo 'Téléchargement réussi : ' . htmlspecialchars($new_name);
+                        } else {
+                            echo 'Erreur lors du déplacement du fichier.';
+                        }
+                    } else {
+                        echo 'Erreur lors de l\'insertion dans la base de données.';
+                    }
                 }
             }
-               
-        } catch(\Exception $e){
-            echo 'erreur de lecture'. $e->getMessage();
-           
-
+        } catch (\Exception $e) {
+            echo 'Erreur : ' . $e->getMessage();
         }
-       
+
     }
 
 public function findOneBy( $id){
@@ -68,7 +71,7 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT * FROM services where id = :id" );
+                $stmt = $pdo->prepare( "SELECT * FROM boutique where id = :id" );
                 $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
 
                 if($stmt->execute()){
@@ -99,7 +102,7 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT * FROM services" );
+                $stmt = $pdo->prepare( "SELECT * FROM boutique" );
                
                 if($stmt->execute()){
 
@@ -136,14 +139,21 @@ public function findOneBy( $id){
                     
                       $titre = $_POST['titre'] ;  
                       $description = $_POST['description'] ;
+                       $prix = $_POST['prix'] ;
+                      $prestation = $_POST['categorie_id'] ;
+
                     $sanitized_titre = htmlspecialchars($titre, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $sanitized_prix = htmlspecialchars($prix, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                     $sanitized_prestations = htmlspecialchars($prestation, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     
             
-                     $stmt = $pdo->prepare('UPDATE services set description = :description, titre = :titre where id = :id ');
+                     $stmt = $pdo->prepare('UPDATE boutique set description = :description, titre = :titre, categorie_id = :categorie_id, prix = :prix where id = :id ');
                      $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                      $stmt->bindParam(':titre', $sanitized_titre , $pdo::PARAM_STR);
                       $stmt->bindParam(':description', $sanitized_description , $pdo::PARAM_STR);
+                         $stmt->bindParam(':prix', $sanitized_prix , $pdo::PARAM_INT);
+                      $stmt->bindParam(':categorie_id', $sanitized_prestations , $pdo::PARAM_INT);
                     
                      
                      $stmt->fetch($pdo::FETCH_ASSOC);
@@ -177,7 +187,7 @@ public function delete($id){
               
                    $id = $_GET['id'] ?? null;
             
-                     $stmt = $pdo->prepare('DELETE FROM services where id = :id');
+                     $stmt = $pdo->prepare('DELETE FROM boutique where id = :id');
                $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                 
                 

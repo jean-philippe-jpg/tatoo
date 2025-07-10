@@ -2,7 +2,7 @@
 
 <?php 
 
-if(isset($$_GET['creations'])) { ?>
+if(isset($_GET['creations'])) { ?>
 
 <div class="container_produits">
 
