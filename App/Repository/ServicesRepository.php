@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use App\Bdd\MySql;
+use App\Entity\Services;
 
 //require_once './App/Bdd/MySql.php';
 //require_once './App/Repository/ServicesRepository.php';
@@ -73,7 +74,7 @@ public function findOneBy( $id){
 
                 if($stmt->execute()){
 
-                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Services::class);
                     
                    return $stmt->fetch();
                   
@@ -103,8 +104,8 @@ public function findOneBy( $id){
                
                 if($stmt->execute()){
 
-                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
-                    
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Services::class);
+
                    return $stmt->fetchAll();
                   
                 } else {
@@ -187,8 +188,8 @@ public function delete($id){
                 if($stmt->execute()){
 
                     echo 'suppression effectuée ';
-                    
-                  
+                    header('Location: ?controller=services&action=read');
+                    exit;
                 } else {
                     echo 'erreur ';
                 }

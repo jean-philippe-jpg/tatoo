@@ -1,17 +1,27 @@
 
 
-<?php if(isset($_GET['id'])) { ?>
+ 
+<?php 
+
+
+require_once './templates/Admin/Partial/_acces.php';
+ require_once './templates/Partial/_header-admin.php';
+
+
+if(isset($_GET['id'])) { ?>
+
+
 <form action="" method="post" >
    <fieldset style="border-radius: 8px;">
-    <legend style="color:  #fdc500;"><?= $findone['titre'] ?></legend>
+    <legend style="color:  #fdc500;"><?= $findone->getTitre() ?></legend>
 
     <label for="titre">Titre</label>
-    <input type="text" name="titre" id="titre" value="<?= $findone['titre']?>" >
+    <input type="text" name="titre" id="titre" value="<?= $findone->getTitre() ?>" >
 
     <label for="description">Description</label>
-  <textarea name="description" id="description" ><?= $findone['description']?></textarea>
-    
-    
+  <textarea name="description" id="description" ><?= $findone->getDescription() ?></textarea>
+
+
     <input  type="submit" name="insert" value="envoyer">
 
 

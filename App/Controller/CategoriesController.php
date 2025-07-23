@@ -83,6 +83,7 @@ protected function create(): void
         $categoriesRepository = new CategoriesRepository();
         $categoriesRepository->delete($id);
 
+        $this->render('/Admin/admin');
         
     }
 

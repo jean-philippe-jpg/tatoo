@@ -89,10 +89,10 @@ protected function register(): void
 
  protected function read(): void
  {
-        $servicesRepository = new ServicesRepository();
-        $services = $servicesRepository->read();
-        $this->render('/Admin/Services/read', [
-            'services' => $services
+        $usersRepository = new UsersRepository();
+        $users = $usersRepository->read();
+        $this->render('/Admin/Users/read', [
+            'user' => $users
         ]);
     }
     protected function update()
@@ -112,10 +112,10 @@ protected function register(): void
     protected function delete()
  {
         $id = $_GET['id'];
-        $servicesRepository = new ServicesRepository();
+        $servicesRepository = new UsersRepository();
         $servicesRepository->delete($id);
 
-        //$this->render('/Admin/Services/read' );
+        
         
     }
 

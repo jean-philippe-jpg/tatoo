@@ -1,4 +1,11 @@
-<?php if(isset($_GET['id'])) { ?>
+<?php 
+
+require_once './templates/Admin/Partial/_acces.php';
+ require_once './templates/Partial/_header-admin.php';
+
+
+
+if(isset($_GET['id'])) { ?>
 
     <img class="img-models" src="/templates/Admin/PicsPresta/Uploads/<?= $findone['libele'] ?>" alt="Girl in a jacket" width="200" height="200" > 
 <form action="" method="post" method="post" enctype="multipart/form-data" >
@@ -34,7 +41,7 @@
 
 <form action="" method="post" enctype="multipart/form-data" >
    <fieldset style="border-radius: 8px;">
-    <legend style="color:  #fdc500;">Categorie</legend>
+    <legend style="color:  #fdc500;">Boutique</legend>
 
     <label for="titre">Titre</label>
     <input type="text"  name="titre" id="titre"  required>

@@ -1,4 +1,10 @@
-<?php if(isset($_GET['id'])) { ?>
+<?php 
+
+require_once './templates/Admin/Partial/_acces.php';
+ require_once './templates/Partial/_header-admin.php';
+
+
+if(isset($_GET['id'])) { ?>
 <form action="" method="post" >
    <fieldset style="border-radius: 8px;">
     <legend style="color:  #fdc500;"><?= $findone['titre'] ?></legend>

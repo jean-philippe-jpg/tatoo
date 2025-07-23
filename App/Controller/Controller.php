@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 
+
+use App\Controller\AdminController;
 use App\Controller\PicsPrestaController;
 
 
@@ -15,11 +17,12 @@ try {
 
     switch($_GET['controller']){
 
-          case 'access':
+           case 'users':
 
-            $pagecontroller = new PagesController();
+            $pagecontroller = new UsersController();
             $pagecontroller->route();
-            break; 
+            break;
+
 
 
         case 'home':

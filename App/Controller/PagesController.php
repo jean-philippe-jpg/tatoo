@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Repository\BoutiqueRepository;
+use App\Repository\CategoriesRepository;
 use App\Repository\ServicesRepository;
 use App\Repository\CreationsRepository;
 use App\Repository\PrestationsRepository;
@@ -20,10 +21,7 @@ class PagesController extends Controller
 
                 switch($_GET['action']){
 
-                       case 'admin':
-                        $this->access();
-                        break;
-
+                      
                     case 'home':
                         $this->home();
                         break;
@@ -44,17 +42,9 @@ class PagesController extends Controller
 
       };
 
-} 
-
- protected function access(): void
-    {
-       /* $servicesRepository = new ServicesRepository();
-        $services = $servicesRepository->read();*/
-
-        $this->render('/Admin/admin', [
-            //'services' => $services
-        ]);
     }
+
+ 
 
     protected function home(): void
     {
@@ -62,13 +52,19 @@ class PagesController extends Controller
         $services = $servicesRepository->read();
          $creationsRepository = new CreationsRepository();
         $creations = $creationsRepository->read();
-         $creationsRepository = new BoutiqueRepository();
-        $boutique = $creationsRepository->read();
-      
+         $boutiqueRepository = new BoutiqueRepository();
+        $boutique = $boutiqueRepository->read();
+        $boutiqueRepository = new CategoriesRepository();
+        $categorie = $boutiqueRepository->read();
+        //$categorie = $boutiqueRepository->showCategories();
+
+        
         $this->render('/home', [
-            'services' => $services,
+            'service' => $services,
             'creation' => $creations,
-             'article' => $boutique,
+            'categorie' => $categorie,
+            'article' => $boutique,
+            
         
             
         ]);

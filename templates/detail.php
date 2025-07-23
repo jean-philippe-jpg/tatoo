@@ -2,14 +2,16 @@
 
 
     
-
+<?php
+ require_once './templates/partial/_partial-header.php'
+?>
    
 <div class="card_show">
-    
-       <h4><?= $findone['titre']; ?></h4>
-       <p><?= $findone['description'] ?></p>
-        <p><?= $findone['tarif'] ?></p>
 
+       <h4><?= $findone->getTitre(); ?></h4>
+       <p><?= $findone->getDescription(); ?></p>
+        <p><?= $findone->getPrix(); ?></p>
+</div>
 <div class="container_models">
   <?php foreach($model as $models) { ?>
          

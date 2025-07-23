@@ -1,5 +1,7 @@
 
-
+<?php  
+require_once './templates/partial/_partial-header.php'
+?>
 
 
 <form action="" method="post" >

@@ -96,7 +96,7 @@ protected function create(): void
         $picsPrestaRepository = new PicsPrestaRepository();
         $picsPrestaRepository->delete($id);
 
-        //$this->render('/Admin/PicsPresta/read' );
+        $this->render('/Admin/admin');
         
     }
 

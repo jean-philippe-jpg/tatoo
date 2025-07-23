@@ -2,7 +2,7 @@
 namespace App\Repository;
 
 use App\Bdd\MySql;
-
+use App\Entity\Categories;
 
 class CategoriesRepository
 {
@@ -98,7 +98,7 @@ public function findOneBy( $id){
                
                 if($stmt->execute()){
 
-                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Categories::class );
                     
                    return $stmt->fetchAll();
                   

@@ -118,7 +118,7 @@ class UsersRepository
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT * FROM services" );
+                $stmt = $pdo->prepare( "SELECT * FROM users" );
                
                 if($stmt->execute()){
 
@@ -197,7 +197,7 @@ public function delete($id){
               
                    $id = $_GET['id'] ?? null;
             
-                     $stmt = $pdo->prepare('DELETE FROM services where id = :id');
+                     $stmt = $pdo->prepare('DELETE FROM users where id = :id');
                $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                 
                 
@@ -207,6 +207,7 @@ public function delete($id){
                 if($stmt->execute()){
 
                     echo 'suppression effectuée ';
+                    header('Location: ?controller=users&action=read');
                     
                   
                 } else {

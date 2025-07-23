@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use App\Bdd\MySql;
+use App\Entity\Boutique;
 
 //require_once './App/Bdd/MySql.php';
 //require_once './App/Repository/ServicesRepository.php';
@@ -76,7 +77,7 @@ public function findOneBy( $id){
 
                 if($stmt->execute()){
 
-                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Boutique::class);
                     
                    return $stmt->fetch();
                   
@@ -103,10 +104,43 @@ public function findOneBy( $id){
                 $pdo = $mysql->getPDO();
 
                 $stmt = $pdo->prepare( "SELECT * FROM boutique" );
+                 //$stmt = $pdo->prepare( "SELECT  b.titre as titre, b.id as id, b.description as description, b.prix as prix, b.libele as libele, ct.titre as titre_ct FROM boutique b
+                //INNER JOIN categorie ct ON ct.id = b.categorie_id " );
                
                 if($stmt->execute()){
 
-                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Boutique::class);
+
+                   return $stmt->fetchAll();
+                  
+                } else {
+                    echo 'erreur ';
+                }
+              
+               
+        } catch(\Exception $e){
+            echo 'erreur de lecture'. $e->getMessage();
+           
+
+        }
+       
+        }
+   
+        public function filtreArticles($id){
+
+        try{
+           
+
+                $mysql = Mysql::getInstance();
+                $pdo = $mysql->getPDO();
+
+                $stmt = $pdo->prepare( "SELECT b.id as id, b.titre as titre, b.description as description, b.prix as prix, b.libele as libele, ct.titre as titre_ct FROM boutique b
+                INNER JOIN categorie ct ON b.categorie_id=ct.id where ct.id = :id" );
+                $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
+               
+                if($stmt->execute()){
+
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Boutique::class);
                     
                    return $stmt->fetchAll();
                   

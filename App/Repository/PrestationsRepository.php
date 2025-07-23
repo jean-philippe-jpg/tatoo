@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use App\Bdd\MySql;
+use App\Entity\Prestations;
 
 class PrestationsRepository
 {
@@ -67,14 +68,13 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT  t.id as id, /*s.id,*/ t.description as description, t.titre as titre, t.tarif as tarif from tarifs t
-                                        /*INNER JOIN services s  on s.id = t.service_id*/ where t.id = :id" );
-                 $stmt->bindParam(':id',  $id, $pdo::PARAM_STR);
+                $stmt = $pdo->prepare( "SELECT titre, description, tarif as prix, service_id from tarifs where id = :id" );
+                 $stmt->bindParam(':id',  $id, $pdo::PARAM_INT);
 
                
                 if($stmt->execute()){
 
-                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Prestations::class);
                     
                    return $stmt->fetch();
                   
@@ -133,14 +133,14 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT t.id as presta_id, t.titre, s.id from services s
+                $stmt = $pdo->prepare( "SELECT t.id as p_id, t.titre as titre, s.id as s_id from services s
                                         INNER JOIN tarifs t  on s.id = t.service_id where s.id = :id" );
-                 $stmt->bindParam(':id',  $id, $pdo::PARAM_STR);
+                 $stmt->bindParam(':id',  $id, $pdo::PARAM_INT);
 
 
                 if($stmt->execute()){
 
-                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Prestations::class);
                     
                    return $stmt->fetchAll();
                   
@@ -165,9 +165,9 @@ public function findOneBy( $id){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $stmt = $pdo->prepare( "SELECT t.id as presta_id, t.titre, p.name as name, p.prix as prix, p.libele as libele from tarifs t
+                $stmt = $pdo->prepare( "SELECT t.id as id,  t.titre as titre, p.name as name, p.prix as prix, p.libele as libele from tarifs t
                                         INNER JOIN pics_presta p  on p.presta_id = t.id where t.id = :id" );
-                 $stmt->bindParam(':id',  $id, $pdo::PARAM_STR);
+                 $stmt->bindParam(':id',  $id, $pdo::PARAM_INT);
 
 
                 if($stmt->execute()){

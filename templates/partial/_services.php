@@ -10,15 +10,15 @@
 
 <div class="container_produits">
 
-<?php foreach( $services as $service ){ ?>
+<?php foreach( $service as $services ){ ?>
 
      
 <div class="card_services">
-    
-        <h4><?php echo $service['titre'] ?></h4>
-        <p><?php echo $service['description'] ?></p>
 
-        <a  href="?controller=prestations&action=list&id=<?= $service['id']?>">voir</a>
+        <h4><?php echo $services->getTitre() ?></h4>
+        <p><?php echo $services->getDescription() ?></p>
+
+        <a  href="?controller=prestations&action=list&id=<?= $services->getId() ?>">voir</a>
 
 </div>      
 

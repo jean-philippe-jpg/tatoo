@@ -102,7 +102,7 @@ protected function create(): void
         $prestationsRepository = new PrestationsRepository();
         $prestationsRepository->delete($id);
 
-        //$this->render('/Admin/Prestations/read' );
+       $this->render('/Admin/admin');
         
     }
 

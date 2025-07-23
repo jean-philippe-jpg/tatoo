@@ -89,7 +89,7 @@ protected function create(): void
         $servicesRepository = new CreationsRepository();
         $servicesRepository->delete($id);
 
-        $this->render('/Admin/Creations/read' );
+        $this->render('/Admin/admin' );
         
     }
 

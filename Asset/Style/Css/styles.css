@@ -2,8 +2,15 @@
 
 body {
    background-color: rgb(4, 4, 122);
+   background-image: url('/templates/Admin/PicsPresta/Uploads/icons8-machine-à-tatouer-50.png');
+   background-size: 300px 300px;
+    background-repeat: no-repeat;
+   background-position: center;
+  
 }
-
+.background_admin {
+    background-color: black;
+}
 header {
     display: flex;
 }
@@ -22,9 +29,41 @@ ul {
   margin-left: 25%;
   font-size: 1.5em;
   flex-wrap: wrap;
-  
 
 }
+ 
+ul.admin {
+  
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+    flex-wrap: wrap;
+    padding: 50px;
+    
+}
+
+.admin>li>a {
+    color:#fdc500;
+}
+
+table.admin {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    color: rgb(7, 215, 7) ;
+   
+}
+.admin th {
+    border: #0004fd solid 2px;
+    font-size: 1.5em;
+    color: #fdc500;
+}
+.admin td {
+    border: #fdc500 solid 1px;
+    font-size: 1.2em;
+}
+
+
 
 li {
    

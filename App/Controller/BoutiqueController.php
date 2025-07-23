@@ -34,6 +34,10 @@ class BoutiqueController extends Controller
                 case 'show':
                     $this->show();
                     break;
+
+                 case 'categories':
+                    $this->categories();
+                    break;
                 
 
                  default:
@@ -53,6 +57,22 @@ protected function create(): void
         
         $this->render('/Admin/Boutique/create', [
                 'categorie' => $presta
+        ] );
+        
+    }
+
+    
+
+protected function categories(): void
+ {
+
+    $id = $_GET['id'] ?? null;
+        $boutiqueRepository = new BoutiqueRepository();
+        $filtreproduits = $boutiqueRepository->filtreArticles($id);
+    
+        $this->render('/filtre_prod', [
+                //'categorie' => $categories,
+                'article' => $filtreproduits,
         ] );
         
     }
@@ -88,6 +108,7 @@ protected function create(): void
         $servicesRepository = new BoutiqueRepository();
         $servicesRepository->delete($id);
         
+        $this->render('/Admin/admin' );
     }
 
         protected function show() : void 

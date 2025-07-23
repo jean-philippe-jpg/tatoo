@@ -2,12 +2,13 @@
 namespace App\Repository;
 
 use App\Bdd\MySql;
+use App\Entity\Creations;
 
 class CreationsRepository
 {
 
 
-public function create(){
+/*public function create(){
 
         try{
            
@@ -51,6 +52,57 @@ public function create(){
 
         }
        
+    }*/
+
+    public function create(){
+
+        try {
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+        
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (empty($_FILES['images']['tmp_name'])) {
+                    
+                    echo 'Veuillez sélectionner un fichier.';
+                } else {
+                    $file_basename = pathinfo($_FILES['images']['name'], PATHINFO_FILENAME);
+                    $file_ext = pathinfo($_FILES['images']['name'], PATHINFO_EXTENSION);
+        
+                    $new_name = $file_basename . '_' . date("Ymd_His") . '.' . $file_ext;
+                        
+                     $titre = $_POST['titre'] ;
+                     $description = $_POST['description'] ;
+                     $prix = $_POST['prix'] ;
+                    $sanitized_titre = htmlspecialchars($titre, ENT_QUOTES | ENT_HTML5, 'UTF-8');   
+                    $sanitized_description = htmlspecialchars($description, ENT_QUOTES | ENT_HTML5, 'UTF-8');  
+                    $sanitized_prix = htmlspecialchars($prix, ENT_QUOTES | ENT_HTML5, 'UTF-8');      
+                  
+
+                    $images = $pdo->prepare('INSERT INTO creations (titre, description, prix, libele) VALUES (:titre, :description, :prix, :libele)');
+                    $images->bindParam(':titre',$sanitized_titre, $pdo::PARAM_STR);
+                    $images->bindParam(':description', $sanitized_description, $pdo::PARAM_STR);
+                    $images->bindParam(':prix',  $sanitized_prix, $pdo::PARAM_INT);
+                     $images->bindParam(':libele',  $new_name, $pdo::PARAM_STR);
+            
+       
+                    if ($images->execute()) {
+                        $target_dir = "./templates/Admin/Creations/Uploads/";
+                        $target_path = $target_dir . $new_name;
+        
+                        if (move_uploaded_file($_FILES['images']['tmp_name'], $target_path)) {
+                            echo 'Téléchargement réussi : ' . htmlspecialchars($new_name);
+                        } else {
+                            echo 'Erreur lors du déplacement du fichier.';
+                        }
+                    } else {
+                        echo 'Erreur lors de l\'insertion dans la base de données.';
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+
     }
 
 public function findOneBy( $id){
@@ -94,9 +146,9 @@ public function findOneBy( $id){
                 $stmt = $pdo->prepare( "SELECT * FROM creations" );
                
                 if($stmt->execute()){
+                       
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Creations::class);
 
-                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
-                    
                    return $stmt->fetchAll();
                   
                 } else {
