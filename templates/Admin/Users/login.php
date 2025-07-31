@@ -1,6 +1,8 @@
 
 <?php  
-require_once './templates/partial/_partial-header.php'
+require_once './templates/partial/_partial-header.php';
+
+ 
 ?>
 <form action="" method="post" >
    <fieldset style="border-radius: 8px;">

@@ -128,12 +128,16 @@ protected function create(): void
   protected function list(): void
  {
 
-        $id=$_GET['id'];
+        $id=$_GET['id'] ?? null;
 
         $prestationsRepository = new PrestationsRepository();
         $prestations = $prestationsRepository->servicesList( $id);
+         $findoneby = $prestationsRepository->findOneBy($id);
+          $model = $prestationsRepository->modelsList($id);
         $this->render('/prestation', [
-            'prestation' => $prestations
+            'prestation' => $prestations,
+             'findone' => $findoneby,
+             'model' => $model
         ]);
     }
 

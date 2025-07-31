@@ -1,10 +1,10 @@
   
-<ul>
+<ul >
     
 <?php foreach($categorie as $categories){ ?>
 
   <li><a href="?controller=boutique&action=categories&id=<?= $categories['id'] ?>"><?=$categories['titre'] ?></a></li>
-    
+
 <?php } ?>
   
  

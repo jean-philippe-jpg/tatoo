@@ -19,6 +19,7 @@ require_once './templates/partial/_partial-header.php'
 <label for="password">Password</label>
     <input type="password" name="password" id="password" required>
 
+  
 
     <input type="submit" name="insert" value="envoyer">
 

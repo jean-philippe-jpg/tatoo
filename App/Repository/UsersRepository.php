@@ -19,21 +19,25 @@ class UsersRepository
                 $pdo = $mysql->getPDO();
 
            
-                $statement = $pdo->prepare('INSERT INTO users(username, email, password) VALUES (:username, :email, :password)');
+                $statement = $pdo->prepare('INSERT INTO users(username, email, password, roles) VALUES (:username, :email, :password, :roles)');
                 $statement->bindParam(':username',  $sanitized_username, $pdo::PARAM_STR);
                  $statement->bindParam(':email',  $sanitized_email, $pdo::PARAM_STR);
+                $statement->bindParam(':roles',  $sanitized_roles, $pdo::PARAM_STR);
 
             if(!isset($_POST['email'])) {
 
-               
-                
+              
             } else {
+                    
+
            $username = $_POST['username'];
             $sanitized_username = htmlspecialchars($username, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $email = $_POST['email'];
             $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $password = $_POST['password'];
             $sanitized_password = htmlspecialchars($password, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $roles = $_POST['roles'] ?? 'ROLE_ADMIN';
+            $sanitized_roles = htmlspecialchars($roles, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 
             // Hash du mot de passe en utilisant BCRYPT //
             $statement->bindParam(':password', password_hash( $sanitized_password, PASSWORD_BCRYPT));
@@ -80,9 +84,23 @@ class UsersRepository
                             if ($user && password_verify($sanitized_password, $user['password'])) {
                                 echo 'Connexion réussie'.'<br>';
                                     
-                               
+                               session_start();
+                                $_SESSION['user_id'] = $user['id'];
+                                $_SESSION['username'] = $user['username'];
+                                $_SESSION['email'] = $user['email'];
+                                $_SESSION['password'] = $user['password'] ?? false;
+                                $_SESSION['logged'] = $user['true']; 
+                                $_SESSION['roles'] = $user['roles'] ;
+                                echo 'Bienvenue, ' . htmlspecialchars($user['username'], ENT_QUOTES | ENT_HTML5, 'UTF-8') . ' vous avez le rôle ' . $user['roles'] . '!<br>';
                                 // Redirection ou autre action après la connexion réussie
-                                header('Location: /?services' ); // Exemple de redirection vers le tableau de bord
+                                if ($_SESSION['roles'] == 'ROLE_ADMIN') {
+                                    header('Location: /?controller=services&action=read'); // Exemple de redirection vers le tableau de bord admin
+                                } else {
+                                    header('Location: /index.php'); // Exemple de redirection vers le tableau de bord utilisateur
+
+
+                                }
+                                //header('Location: /?services' ); // Exemple de redirection vers le tableau de bord
                             } else {
                                 echo 'Identifiants incorrects';
                             }

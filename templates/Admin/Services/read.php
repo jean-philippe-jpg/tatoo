@@ -6,7 +6,7 @@ require_once './templates/Admin/Partial/_acces.php';
  require_once './templates/Partial/_header-admin.php';
 ?>
 
-<table class="table">
+
         
         <table class="admin">
       <caption>

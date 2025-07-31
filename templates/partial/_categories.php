@@ -2,16 +2,12 @@
 
 
 
-<select >
+<ul class="categorie">
     
 <?php foreach($categorie as $categories){ ?>
-<div class="container_categories">
-<div class="card_categories">
-    <option value="categorie"><?= $categories['titre']?></option>
-    <h4><?php echo $categories['titre'] ?></h4>
+    
+    <li><a href="?controller=categories&action=list&id=<?= $categories->getId() ?>"><?= $categories->getTitre() ?></a></li>
+    
+
 <?php } ?>
-  
- 
-</select>
-
-
+</ul>

@@ -13,45 +13,68 @@ body {
 }
 header {
     display: flex;
+    font-family: Spicy Rice, Tangerine;
+    font-size: 2em;
+    margin-left: -100px;
 }
-.title {
-   color: blanchedalmond;
-   text-decoration: none;
-   font-size: 2em;
-   text-align: center;
-   margin-top: 20px;
-}
+
 
 ul {
     
  display: flex;
   justify-content: center;
-  margin-left: 25%;
+  margin: auto;
   font-size: 1.5em;
   flex-wrap: wrap;
 
 }
- 
+
+
+h1{
+    font-family: Spicy Rice, Tangerine;
+    font-size: 4em;
+}
+h3 {
+
+    font-family: Spicy Rice, Tangerine;
+    font-size: 2em;
+    
+}
 ul.admin {
   
     display: flex;
     justify-content: center;
     font-size: 1.5em;
     flex-wrap: wrap;
-    padding: 50px;
-    
+    padding: 50px; 
 }
+
+
+.categorie>li>a {
+    
+    color: black;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: gray;
+    margin-left: -62vw;
+    font-size: 0.8em;
+  
+}
+
 
 .admin>li>a {
     color:#fdc500;
+     
 }
 
-table.admin {
+
+
+.admin {
     width: 100%;
     margin: auto;
     text-align: center;
     color: rgb(7, 215, 7) ;
-   
+    
 }
 .admin th {
     border: #0004fd solid 2px;
@@ -62,13 +85,12 @@ table.admin {
     border: #fdc500 solid 1px;
     font-size: 1.2em;
 }
-
-
-
+ 
 li {
    
     list-style: none;
-   margin: 10px;
+      margin: 10px;
+      
 }
 li > a {
     text-decoration: none;
@@ -93,14 +115,7 @@ li > a {
        margin-left: 5%;
     }
 }
-.container_produits {
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-    justify-content: space-around;
-}
 .card_produit {
    text-align: center;
     width: 200px ;
@@ -109,6 +124,7 @@ li > a {
     border-color: blanchedalmond;
     border-width: 1px;
     border-radius: 8px;
+   
 }
 
 .card_creations {
@@ -125,34 +141,39 @@ text-align: center;
 .card_services {
 
 text-align: center;
-    width: 300px ;
+    width: 70vw ;
     border-radius: 8px;
     background: #caf0f8;
-    padding: 10px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 100px;
 
 }
 .card_show {
-    margin: auto;
-    padding: 10px;
     text-align: center;
-  
-    
-   
-    border-radius: 8px;
-    background: #caf0f8;
 
 }
+.card_show > p{
+    font-size: 1.2rem;
+    color: white;
+
+}
+
 
 .container_models{
     display: flex;
-justify-content: center;
-flex-wrap: wrap;
-}
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background: white;
+    padding: 20px;
+    width: 50vw;
+    margin: auto;
+    font-size: 1.2em;
+    border-radius: 8px;
 
-.card_models {
-
-    
 }
+ 
+
 .img-models {
 
     border-radius: 8px;
