@@ -71,7 +71,6 @@ protected function categories(): void
         $filtreproduits = $boutiqueRepository->filtreArticles($id);
     
         $this->render('/filtre_prod', [
-                //'categorie' => $categories,
                 'article' => $filtreproduits,
         ] );
         

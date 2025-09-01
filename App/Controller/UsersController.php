@@ -57,20 +57,19 @@ protected function register(): void
         $servicesRepository->addRegister();
         $servicesRepository->login();
         
-        $this->render('/Admin/Users/register', [
-
-        ] );
-        
+       
     }
 
     protected function login(): void
  {
         $servicesRepository = new UsersRepository();
         $sessions = $servicesRepository->login();
-        
-        
+        $register = $servicesRepository->addRegister();
+
+
         $this->render('/Admin/Users/login', [
-            'sessions' => $sessions
+            'sessions' => $sessions,
+            'register' => $register
         ] );
         
     }

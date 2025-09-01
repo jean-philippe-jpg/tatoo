@@ -20,5 +20,8 @@ require_once './templates/partial/_services.php';
     require_once './templates/partial/_boutique.php';
 
 
+} elseif (isset($_GET['contact'])) {
+
+     require_once './templates/partial/_contact.php';
 }
 require_once './templates/partial/_partial-footer.php';

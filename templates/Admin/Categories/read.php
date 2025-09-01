@@ -2,7 +2,7 @@
 <?php
 
 require_once './templates/Admin/Partial/_acces.php';
- require_once './templates/Partial/_header-admin.php';
+ require_once './templates/partial/_header-admin.php'
 ?>
 
 <h4>Serices</h4>
@@ -34,4 +34,3 @@ require_once './templates/Admin/Partial/_acces.php';
       </tbody>
     </table>
       
-<?php require_once './templates/Partial/_footer.php'; ?>

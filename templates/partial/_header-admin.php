@@ -12,47 +12,7 @@
 <body class="background_admin">
 
     <header>
-        <?php
-            
-           /* if($id_session){
-                echo 'ID de session (récupéré via session_id()) : <br>'
-                .$id_session. '<br>';
-                 
-            }
-
-            echo '<br><br>';
-            if(isset($_COOKIE['PHPSESSID'])){
-                echo 'ID de session (récupéré via $_COOKIE) : <br>'
-                .$_COOKIE['PHPSESSID'];
-            }*/
-if($_SERVER['REQUEST_METHOD'] === "POST") {
-
-   // if(isset($_POST['username']) && isset($_POST['password'])) {
-        $username  = $_POST['username'];
-        $email  = $_POST['email'];
-     
-       // if ( $username === 'toto' AND $password == 'toto' ) {
-            //Initialisation de notre session en tant qu'administrateur 
-            //$_SESSION['admin'] = true;
-            $_SESSION['username'] = $username;
-            $_SESSION['email'] = $email;
-            // redirection 
-            echo "Bienvenue à toi, $username";
-            
-        /* else if ( $username === 'user' AND $password == 'user' ) {
-            //Initialisation de notre session en tant qu'utilisateur
-            $_SESSION['admin'] = false;
-            $_SESSION['username'] = $username;
-            $_SESSION['email'] = $email;
-            // création du cookie utilisateur
-            echo "Bienvenue à toi, $username";*/
-} else {
-            echo "<p >erreur de session</p><br>";
-        }
-
-                
-            
-        ?>
+        
          
         <ul>
             <li><a href="?creations">creation</a></li>

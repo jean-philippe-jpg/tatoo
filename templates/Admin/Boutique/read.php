@@ -3,8 +3,9 @@
 
 <h4>Boutique</h4>
 
-<?php require_once './templates/Admin/Partial/_acces.php'; ?>
-<?php require_once './templates/Partial/_header-admin.php'; ?>
+<?php require_once './templates/Admin/Partial/_acces.php';
+require_once './templates/partial/_header-admin.php' ?>
+
 <table class="admin">
       <caption>
         tableau des services proposés
@@ -33,4 +34,3 @@
       </tbody>
     </table>
       
-<?php require_once './templates/Partial/_footer.php'; ?>

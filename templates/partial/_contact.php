@@ -1,7 +1,15 @@
 
 
 <?php if (isset($_GET['contact'])) { ?>
+<?php
+if (empty($_POST) === false) {
+    $_POST['name'];
+    $_POST['objet'];
+    $_POST['email'];
+    $_POST['message']; ?>
+    <div class="succes"><?= "<p>Merci " . $_POST['name'] . " pour votre message concernant " . $_POST['objet'] . ". Nous vous répondrons à l'adresse " . $_POST['email'] . ".</p>"; ?></div>
 
+<?php } ?>
 <form action="" method="post">
    <fieldset style="border-radius: 8px;">
     <legend style="color:  #fdc500;">Contactez-nous</legend>
@@ -24,12 +32,5 @@
 
 </fieldset>
 </form>
-<?php
-if (empty($_POST) === false) {
-    $_POST['name'];
-    $_POST['objet'];
-    $_POST['email'];
-    $_POST['message'];
-    echo "Merci " . $_POST['name'] . " pour votre message concernant " . $_POST['objet'] . ". Nous vous répondrons à l'adresse " . $_POST['email'] . ".";
-}
- } ?>
+
+ <?php } ?>

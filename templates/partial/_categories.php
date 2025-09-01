@@ -6,7 +6,7 @@
     
 <?php foreach($categorie as $categories){ ?>
     
-    <li><a href="?controller=categories&action=list&id=<?= $categories->getId() ?>"><?= $categories->getTitre() ?></a></li>
+    <div><li><a href="?controller=boutique&action=categories&id=<?= $categories->getId() ?>"><?= $categories->getTitre() ?></a></li></div>
     
 
 <?php } ?>

@@ -1,10 +1,6 @@
 
 
-<?php 
 
-
-  
-?>
 
 
 <div class="container_produits">

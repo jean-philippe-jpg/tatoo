@@ -25,44 +25,37 @@
 
 </head>
 
-        <?php
+        
          
-           /* if($id_session){
-                echo 'ID de session (récupéré via session_id()) : <br>'
-                .$id_session. '<br>';
-                 
-            }
+          
 
-            echo '<br><br>';
-            if(isset($_COOKIE['PHPSESSID'])){
-                echo 'ID de session (récupéré via $_COOKIE) : <br>'
-                .$_COOKIE['PHPSESSID'];
-            }*/
-if (!isset($_SESSION['username']) && !isset($_SESSION['email'])) {
+<body class="background">
+
+    <header>
+        <a class="logo" href="index.php"><img src="../../machine tatoo.jpg"   alt="" srcset=""></a>
+
+        <ul >
+            
+            <li><a href="?creations">creation</a></li>
+            <li><a href="?services">service</a></li>
+            <li><a href="?boutique">boutique</a></li>
+            <li><a href="?contact">contact</a></li>
+            <li  class="fa-solid fa-user"><a  href="?controller=users&action=login&login">login</a></li>
+            <li><a href="?controller=services&action=read">admin</a></li>
+       
+    <?php
+    if (!isset($_SESSION['username']) && !isset($_SESSION['email'])) {
     session_start();
     $username = $_SESSION['username'];
-$email = $_SESSION['email'];
-echo "<h2>Bienvenue, $username</h2>";
-echo "<p>Votre adresse e-mail est : $email</p>";
+    $email = $_SESSION['email']; 
+    echo "<li style='margin-left: 50px;'><a style='color: blue;'>Bonjour, $username</a></li>";
+    echo "<li ><a style='color: blue;'>$email</a></li>";
+
 } else {
     echo "<h2>Bienvenue, visiteur</h2>";
     echo "<p>Veuillez vous connecter pour voir vos informations.</p>";
 }
 
 ?>
-<body class="background">
-
-    <header>
-        
-        <ul class="header">
-            <li><a class="logo" href="index.php">logo</a></li>
-            <li><a href="?creations">creation</a></li>
-            <li><a href="?services">service</a></li>
-            <li><a href="?boutique">boutique</a></li>
-            <li><a href="?contact">contact</a></li>
-            <li><a href="?controller=users&action=login">connexion</a></li>
-            <li><a href="?controller=users&action=register">inscription</a></li>
-            <li><a href="?controller=services&action=read">admin</a></li>
-        </ul>
-        
-    </header>
+ </ul>
+  </header>

@@ -1,21 +1,27 @@
 
 
-body {
-   background-color: rgb(4, 4, 122);
-   background-image: url('/templates/Admin/PicsPresta/Uploads/icons8-machine-à-tatouer-50.png');
-   background-size: 300px 300px;
-    background-repeat: no-repeat;
-   background-position: center;
   
-}
+
 .background_admin {
     background-color: black;
 }
+
 header {
     display: flex;
     font-family: Spicy Rice, Tangerine;
-    font-size: 2em;
-    margin-left: -100px;
+    font-size: 1.8em;
+     background: #02021c; 
+    
+}
+.logo>img {
+    width: 150px;
+    height: 150px;
+   border-radius: 50%;
+   padding: 20px;
+}
+
+.footer {
+   margin-top: 100%;
 }
 
 
@@ -24,6 +30,7 @@ ul {
  display: flex;
   justify-content: center;
   margin: auto;
+   
   font-size: 1.5em;
   flex-wrap: wrap;
 
@@ -50,16 +57,33 @@ ul.admin {
 }
 
 
-.categorie>li>a {
+.categorie>div>li>a {
     
-    color: black;
-    padding: 10px;
+   color: black;
+    font-size: 1.5em;
+    
+}
+.categorie>div {
+    
     border-radius: 8px;
-    background-color: gray;
-    margin-left: -62vw;
-    font-size: 0.8em;
+    background: grey;
+    padding: 10px;
+    width: 500px;
+    margin: auto;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.categorie {
+    display: block;
+   margin-top: 100px;
   
 }
+.categorie>li {
+   margin-bottom: 20px;
+  
+}
+
 
 
 .admin>li>a {
@@ -85,6 +109,16 @@ ul.admin {
     border: #fdc500 solid 1px;
     font-size: 1.2em;
 }
+.succes {
+    text-align: center;
+    color: green;
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: lightgreen;
+    width: 70vw;
+    margin: auto;
+}
  
 li {
    
@@ -98,6 +132,16 @@ li > a {
 
     
 }
+@media (min-width: 360px) and (max-width: 811px) {
+    .container_articles>div {
+       width: 150px;
+       margin-right: 20px;
+    }
+    .img-article {
+        width: 150px;
+        
+    }
+}
 @media (max-width: 688px) {
     ul {
         display:none;
@@ -108,6 +152,7 @@ li > a {
     ul {
        margin-left: 10%;
     }
+    
 }
 
 @media (max-width: 900px)  {
@@ -139,15 +184,19 @@ text-align: center;
 }
 
 .card_services {
-
-text-align: center;
+    text-align: center;
     width: 70vw ;
     border-radius: 8px;
-    background: #caf0f8;
+    box-shadow: #02021c 3px 3px 5px 5px;
+    background: #ef7008;
     padding: 20px;
     margin: auto;
     margin-top: 100px;
 
+}
+.card_services:hover {
+
+     box-shadow: #02021c 10px 10px 5px 5px;
 }
 .card_show {
     text-align: center;
@@ -160,23 +209,86 @@ text-align: center;
 }
 
 
-.container_models{
+.container{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    background: white;
-    padding: 20px;
     width: 50vw;
     margin: auto;
     font-size: 1.2em;
-    border-radius: 8px;
 
 }
+.container_articles {
+     display: flex;
+    justify-content: space-around;
+     flex-wrap: wrap;
+     margin-top: 100px;
+     margin-bottom: 30px;
+    
+
+}
+.container_articles>div {
+   margin-bottom: 30px;
+}
+
+.cards_articles {
+    box-shadow: #02021c 0px 0px 3px 3px;
+    width: 200px;
+    text-align: center ;
+}
+.articles>img {
+    margin-top: 0px;
+   border-radius: 0px;
+   
+}
+.articles>h3 {
+    margin-top: 4px;
+    margin-bottom: 0px;
+}
+.articles {
+
+    text-align: center;
+}
+.card_footer {
+    text-align: center;
+    background: #ef7008;
+    height: 100px; 
+    
+}
+.card_footer>a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+.items>h3 {
+   margin-bottom: 5px;
+   text-align: center;
+}
+.items>p {
+  
+   text-align: center;
+}
+
+.items:hover {
+    margin-top: 150px;
+   transform: scale(2);
+   transition: transform 0.7s, margin-top 0.8s;
  
+}
+.items:hover>h3 {
+    display: none;
+}
+.cards_articles:hover {
 
+    box-shadow: #02021c 5px 5px 5px 5px;
+}
 .img-models {
-
+     
     border-radius: 8px;
+    box-shadow: #02021c 0px 0px 3px 3px;
+   
+    
 }
 
 .table {

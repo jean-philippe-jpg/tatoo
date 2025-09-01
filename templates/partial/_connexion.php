@@ -2,7 +2,7 @@
 
 <form action="" method="post">
 
-   <fieldset style="border-radius: 8px;">
+   <fieldset style="border-radius: 8px; ">
     <legend style="color:  #fdc500;">Contactez-nous</legend>
 
     <label for="name">Username</label>
@@ -20,15 +20,5 @@
 
 </fieldset>
 </form>
-<?php
-if (empty($_POST) === false) {
-    $_POST['name'];
-    
-    $_POST['email'];
-    $_POST['password'];
-    echo "Merci " . $_POST['name'] . " pour votre connexion. Nous vous répondrons à l'adresse " . $_POST['email'] . ".";
 
-    
-    echo $_POST['password'];
-}
- } ?>
+<?php } ?>

@@ -34,4 +34,3 @@ require_once './templates/Admin/Partial/_acces.php';
     </table>
       
             
-<?php require_once './templates/Partial/_footer.php'; ?>
